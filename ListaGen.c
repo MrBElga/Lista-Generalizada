@@ -20,7 +20,7 @@ char menu()
 
 int main()
 {
-    char op, aux[8];
+    char op;
     ListaGen *L = NULL; 
 
     do {
@@ -28,11 +28,9 @@ int main()
         system("cls");
         switch (op) {
             case '1':
-                printf("Insira na lista: ");
-                fflush(stdin);
-                gets(aux);
+                printf("Insira na lista");
                 if (L == NULL) {
-                    L = CriaT(aux);
+                    L = Cons(CriaT("a"),Cons(Cons(CriaT("b"),Cons(Cons(CriaT("c"),NULL),NULL)),NULL));
                 } else {
                     printf("Lista ja existe. Nao e possivel criar outra.\n");
                 }

@@ -23,7 +23,6 @@ ListaGen *CriaT(char info[])
     return L;
 }
 
-
 char Nula(ListaGen *L)
 {
     return L == NULL;
@@ -36,19 +35,19 @@ char Atomo(ListaGen *L)
 
 ListaGen *Cons(ListaGen *H, ListaGen *T)
 {
- if (Atomo(T))
- {
- printf("Cons: Segundo arqumento nao pode ser Atomo!");
- return NULL;
- }
- else
- {
- ListaGen *L = (ListaGen*)malloc(sizeof(ListaGen));
- L->terminal = 0;
- L->no.lista.cabeca = H;
- L->no.lista.cauda = T;
- return L;
- }
+    if (Atomo(T))
+    {
+        printf("Cons: Segundo arqumento nao pode ser Atomo!");
+        return NULL;
+    }
+    else
+    {
+        ListaGen *L = (ListaGen *)malloc(sizeof(ListaGen));
+        L->terminal = 0;
+        L->no.lista.cabeca = H;
+        L->no.lista.cauda = T;
+        return L;
+    }
 }
 
 ListaGen *Head(ListaGen *L)
@@ -91,8 +90,8 @@ void exibeConteudo(ListaGen *L)
 
 void exibe(ListaGen *L)
 {
-    if(Atomo(L))
-        printf("%s",L->no.info);
+    if (Atomo(L))
+        printf("%s", L->no.info);
     else
     {
         printf("[");
@@ -100,7 +99,7 @@ void exibe(ListaGen *L)
         {
             exibe(Head(L));
             L = Tail(L);
-            if(!Nula(L))
+            if (!Nula(L))
                 printf(",");
         }
         printf("]");
