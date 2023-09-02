@@ -105,6 +105,7 @@ void exibe(ListaGen *L)
         printf("]");
     }
 }
+
 void destroiLista(ListaGen **L)
 {
     if (!Nula(*L))
@@ -121,4 +122,13 @@ void destroiLista(ListaGen **L)
             *L = NULL;
         }
     }
+}
+
+ListaGen *duplicarListaGen(ListaGen *L)
+{
+    if(Nula(L))
+        return NULL;
+    if(Atomo(L))
+        return CriaT(L->no.info);
+    return Cons(duplicarListaGen(Head(L)),duplicarListaGen(Tail(L)));
 }

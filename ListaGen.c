@@ -12,6 +12,7 @@ char menu()
     printf("[2] Remover\n");
     printf("[3] Imprimir Lista\n");
     printf("[4] Destruir Lista\n");
+    printf("[5] Duplicar Lista\n");
     printf("[ESC] SAIR\n");
     printf("OPCAO: ");
     
@@ -21,7 +22,7 @@ char menu()
 int main()
 {
     char op;
-    ListaGen *L = NULL; 
+    ListaGen *L = NULL, *L2 = NULL; 
 
     do {
         op = menu();
@@ -59,6 +60,18 @@ int main()
                 fflush(stdin);
                 getchar();
                 break;
+            case '5':
+                if (L != NULL) {
+                     L2 = duplicarListaGen(L);
+                    printf("Lista duplioada.\n");
+                    exibe(L2);
+                } else {
+                    printf("Nao ha lista para duplicar.\n");
+                }
+                fflush(stdin);
+                getchar();
+                break;
+               
         }
     } while (op != 27);
 
