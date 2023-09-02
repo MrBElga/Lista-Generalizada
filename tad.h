@@ -132,3 +132,16 @@ ListaGen *duplicarListaGen(ListaGen *L)
         return CriaT(L->no.info);
     return Cons(duplicarListaGen(Head(L)),duplicarListaGen(Tail(L)));
 }
+
+char comparaListaGen(ListaGen *L, ListaGen *L2)
+{
+    if(Nula(L) && Nula(L2))
+         return 1;
+    if(Nula(L) || Nula(L2))
+         return 0;
+    if(Atomo(L) && Atomo(L2))
+         return !strcmp(L->no.info, L2->no.info);  //1
+    if(Atomo(L) || Atomo(L2))
+         return 0; //0
+    return comparaListaGen(Head(L), Head(L2)) && comparaListaGen(Tail(L), Tail(L2));
+}
