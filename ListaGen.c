@@ -33,9 +33,7 @@ int main()
                     L = Cons(CriaT("a"),Cons(Cons(CriaT("b"),Cons(Cons(CriaT("c"),NULL),NULL)),NULL));
                 } else {
                     printf("Lista ja existe. Nao e possivel criar outra.\n");
-                }
-                fflush(stdin);
-                getchar();
+                }       
                 break;
 
             case '2':
