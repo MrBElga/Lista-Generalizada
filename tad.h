@@ -89,6 +89,23 @@ void exibeConteudo(ListaGen *L)
     }
 }
 
+void exibe(ListaGen *L)
+{
+    if(Atomo(L))
+        printf("%s",L->no.info);
+    else
+    {
+        printf("[");
+        while (!Nula(L))
+        {
+            exibe(Head(L));
+            L = Tail(L);
+            if(!Nula(L))
+                printf(",");
+        }
+        printf("]");
+    }
+}
 void destroiLista(ListaGen **L)
 {
     if (!Nula(*L))

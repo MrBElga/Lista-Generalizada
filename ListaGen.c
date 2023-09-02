@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <conio2.h>
 #include "tad.h"
 
 char menu()
@@ -14,7 +15,7 @@ char menu()
     printf("[ESC] SAIR\n");
     printf("OPCAO: ");
     
-    return getchar();
+    return getche();
 }
 
 int main()
@@ -46,6 +47,8 @@ int main()
             case '3':
                 printf("Conteudo da lista:\n");
                 exibeConteudo(L);
+                printf("\n");
+                exibe(L);
                 fflush(stdin);
                 getchar();
                 break;
