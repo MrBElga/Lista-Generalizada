@@ -1,45 +1,83 @@
-
 struct reg_lista
 {
-	struct listagen *cabeca;
-	struct listagen *cauda;
+    struct listagen *cabeca;
+    struct listagen *cauda;
 };
 union info_lista
 {
-	char info[8]; //se for 1
-	struct reg_lista lista;//se for 0
+    char info[8];           // se for 1
+    struct reg_lista lista; // se for 0
 };
 struct listagen
 {
-	char terminal;
-	union info_lista no;
+    char terminal;
+    union info_lista no;
 };
 typedef struct listagen ListaGen;
 
-ListaGen* CriaT(char *info)
+ListaGen *CriaT(char info[])
 {
-	ListaGen *L = (ListaGen*)malloc(sizeof(ListaGen));
-	L->terminal = 1;
-	strcpy((L->no.info), info);
-	return L;
+    ListaGen *L = (ListaGen *)malloc(sizeof(ListaGen));
+    L->terminal = 1;
+    strcpy((L->no.info), info);
+    return L;
 }
 
-char Nula(ListaGen* L)
+
+char Nula(ListaGen *L)
 {
-	return L==NULL;
+    return L == NULL;
 }
 
 char Atomo(ListaGen *L)
 {
-	return !Nula(L) && L->terminal;
+    return !Nula(L) && L->terminal;
 }
 
+ListaGen *Cons(ListaGen *H, ListaGen *T)
+{
+ if (Atomo(T))
+ {
+ printf("Cons: Segundo arqumento nao pode ser Atomo!");
+ return NULL;
+ }
+ else
+ {
+ ListaGen *L = (ListaGen*)malloc(sizeof(ListaGen));
+ L->terminal = 0;
+ L->no.lista.cabeca = H;
+ L->no.lista.cauda = T;
+ return L;
+ }
+}
+
+ListaGen *Head(ListaGen *L)
+{
+    if (Nula(L) || Atomo(L))
+    {
+        printf("Head: argumento deve ser lista não vazia!");
+        return NULL;
+    }
+    else
+        return L->no.lista.cabeca;
+}
+
+ListaGen *Tail(ListaGen *L)
+{
+    if (Nula(L) || Atomo(L))
+    {
+        printf("Tail: argumento deve ser lista não vazia!");
+        return NULL;
+    }
+    else
+        return L->no.lista.cauda;
+}
 
 void exibeConteudo(ListaGen *L)
 {
-    if(!Nula(L))
+    if (!Nula(L))
     {
-        if(Atomo(L))
+        if (Atomo(L))
         {
             printf("%s", L->no.info);
         }
@@ -53,19 +91,18 @@ void exibeConteudo(ListaGen *L)
 
 void destroiLista(ListaGen **L)
 {
-    if(!Nula(*L))
+    if (!Nula(*L))
     {
-        if(Atomo(*L))
+        if (Atomo(*L))
         {
             free(*L);
         }
         else
         {
-            destroiLista(&(*L) -> no.lista.cabeca);
-            destroiLista(&(*L) -> no.lista.cauda);
+            destroiLista(&(*L)->no.lista.cabeca);
+            destroiLista(&(*L)->no.lista.cauda);
             free(*L);
             *L = NULL;
         }
     }
 }
-
