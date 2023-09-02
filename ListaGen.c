@@ -13,6 +13,7 @@ char menu2()
     printf("[2] [[a,[f,[c]]]\n");
     printf("[3] [a,[]]\n");
     printf("[4] [[a,b],c]\n");
+    printf("[5] [[a],C]\n");
     printf("OPCAO: ");
 
     return getche();
@@ -67,6 +68,9 @@ int main()
                 case '4':
                     L = Cons(Cons(CriaT("a"), Cons(CriaT("b"), NULL)), Cons(CriaT("c"), NULL));
                     break;
+                case '5':
+                    L = Cons(Cons(CriaT("a"),NULL), Cons(CriaT("c"), NULL));
+                    break;
                 }
             }
             else
@@ -95,6 +99,9 @@ int main()
                     break;
                 case '4':
                     L2 = Cons(Cons(CriaT("a"), Cons(CriaT("b"), NULL)), Cons(CriaT("c"), NULL));
+                    break;
+                case '5':
+                    L = Cons(Cons(CriaT("a"),NULL), Cons(CriaT("c"), NULL));
                     break;
                 }
             }
