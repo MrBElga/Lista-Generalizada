@@ -152,9 +152,22 @@ char comparaListaGen(ListaGen *L, ListaGen *L2)
     return comparaListaGen(Head(L), Head(L2)) && comparaListaGen(Tail(L), Tail(L2));
 }
 
+void deph(ListaGen *L, int nivel, int *maior)
+{
+    if(!Nula(L))
+    {
+        if(!Atomo(L))
+        {
+            if(nivel>*maior)
+                *maior = nivel;
+            deph(Head(L));
+            deph(Tail(L));
+        }
+    }
+}
 
 void init(fila **inicio){
-        *inicio = NULL;
+        *ini    cio = NULL;
 }
 
 char QisEmpety(fila *inicio){
