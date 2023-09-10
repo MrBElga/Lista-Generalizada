@@ -160,14 +160,14 @@ void deph(ListaGen *L, int nivel, int *maior)
         {
             if(nivel>*maior)
                 *maior = nivel;
-            deph(Head(L));
-            deph(Tail(L));
+            deph(Head(L),nivel+1,&*maior);
+            deph(Tail(L),nivel,&*maior);
         }
     }
 }
 
 void init(fila **inicio){
-        *ini    cio = NULL;
+        *inicio = NULL;
 }
 
 char QisEmpety(fila *inicio){
@@ -208,7 +208,7 @@ int top(fila *inicio){
     return inicio->info;    
 }
 
-void exibe(fila *inicio){
+void exibeF(fila *inicio){
     system("cls");
     if(inicio == NULL){
     	printf("FILA: vazia");

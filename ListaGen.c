@@ -29,6 +29,7 @@ char menu()
     printf("[4] Destruir Lista\n");
     printf("[5] Duplicar Lista\n");
     printf("[6] Compara Lista\n");
+    printf("[7] Nivel da Lista\n");
     printf("[ESC] SAIR\n");
     printf("OPCAO: ");
 
@@ -37,6 +38,7 @@ char menu()
 
 int main()
 {
+    int maior=0;
     char op, op2,op3;
     ListaGen *L = NULL, *L2 = NULL;
     //
@@ -197,6 +199,30 @@ int main()
                 printf("Nao ha lista para comparar.\n");
             }
             fflush(stdin);
+            getchar();
+            break;
+        case '7':
+            if(L != NULL)
+            {
+                 maior=0;
+                 deph(L,1,&maior);
+                 printf("niveis: %d",maior);
+            }
+            else
+            {
+                printf("Lista L vazia\n");
+            }
+
+            if(L2 != NULL)
+            {
+                 maior=0;
+                 deph(L2,1,&maior);
+                 printf("niveis: %d",maior);
+            }
+            else
+            {
+                printf("Lista L2 vazia\n");
+            }
             getchar();
             break;
         }
