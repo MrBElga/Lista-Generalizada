@@ -50,7 +50,7 @@ int main()
         switch (op)
         {
         case '1':
-            printf("Insira na lista");
+         
             if (L == NULL)
             {
                 op2 = menu2();
@@ -65,7 +65,7 @@ int main()
                     break;
 
                 case '3':
-                    L = Cons(CriaT("a"), NULL);
+                    L = Cons(CriaT("a"), Cons(NULL,NULL));
                     break;
                 case '4':
                     L = Cons(Cons(CriaT("a"), Cons(CriaT("b"), NULL)), Cons(CriaT("c"), NULL));
@@ -82,7 +82,7 @@ int main()
             break;
 
         case '2':
-            printf("Insira na lista");
+      
             if (L2 == NULL)
             {
                 op2 = menu2();
@@ -206,7 +206,9 @@ int main()
             {
                  maior=0;
                  deph(L,1,&maior);
-                 printf("niveis: %d",maior);
+                 printf("Lista: ");
+                 exibe(L);
+                 printf("\nniveis: %d\n",maior);
             }
             else
             {
@@ -217,7 +219,9 @@ int main()
             {
                  maior=0;
                  deph(L2,1,&maior);
-                 printf("niveis: %d",maior);
+                 printf("Lista: ");
+                 exibe(L2);
+                 printf("\nniveis: %d\n",maior);
             }
             else
             {
