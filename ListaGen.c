@@ -37,7 +37,7 @@ char menu()
 
 int main()
 {
-    char op, op2;
+    char op, op2,op3;
     ListaGen *L = NULL, *L2 = NULL;
     //
 
@@ -159,6 +159,19 @@ int main()
                 L2 = duplicarListaGen(L);
                 printf("Lista duplioada.\n");
                 exibe(L2);
+            }
+            else if(L2 != NULL)
+            {
+            	exibe(L2);
+            	printf("\nA Lista 2 está ocupada deseja destrui-la [S/n]");
+            	op3=getchar();
+            	if(toupper(op3) == 'S'){
+            		destroiLista(&L2);
+            		L2 = duplicarListaGen(L);
+                	printf("Lista duplioada.\n");
+                	exibe(L2);
+            	}
+										
             }
             else
             {
