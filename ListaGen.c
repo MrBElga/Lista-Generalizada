@@ -30,6 +30,7 @@ char menu()
     printf("[5] Duplicar Lista\n");
     printf("[6] Compara Lista\n");
     printf("[7] Nivel da Lista\n");
+    printf("[8] Concatenar Lista\n");
     printf("[ESC] SAIR\n");
     printf("OPCAO: ");
 
@@ -40,7 +41,7 @@ int main()
 {
     int maior=0;
     char op, op2,op3;
-    ListaGen *L = NULL, *L2 = NULL;
+    ListaGen *L = NULL, *L2 = NULL, *aux = NULL;
     //
 
     do
@@ -97,7 +98,7 @@ int main()
                     break;
 
                 case '3':
-                    L2 = Cons(CriaT("a"), NULL);
+                    L2 =  Cons(CriaT("a"), Cons(NULL,NULL));
                     break;
                 case '4':
                     L2 = Cons(Cons(CriaT("a"), Cons(CriaT("b"), NULL)), Cons(CriaT("c"), NULL));
@@ -165,7 +166,7 @@ int main()
             else if(L2 != NULL)
             {
             	exibe(L2);
-            	printf("\nA Lista 2 está ocupada deseja destrui-la [S/n]");
+            	printf("\nA Lista 2 esta ocupada deseja destrui-la [S/n]");
             	op3=getchar();
             	if(toupper(op3) == 'S'){
             		destroiLista(&L2);
@@ -226,6 +227,33 @@ int main()
             else
             {
                 printf("Lista L2 vazia\n");
+            }
+            getchar();
+            break;
+        case '8':
+            if(L != NULL && L2 != NULL)
+            {
+                exibe(L);
+                aux = L;
+                while (!Nula(Tail(aux)))
+                    aux = Tail(aux);
+                aux->no.lista.cauda = L2;
+                printf(" + ");
+                exibe(L2);
+                printf(" = ");
+                exibe(L);
+                printf("\n## Lista concatenada ##\n");
+            }
+            else
+            {
+                if(L == NULL)
+                {
+                    printf("Lista 1 nao pode ser nula\n");
+                }
+                else
+                {
+                    printf("Lista 2 nao pode ser nula\n");
+                }
             }
             getchar();
             break;
