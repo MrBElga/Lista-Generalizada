@@ -14,6 +14,9 @@ char menu2()
     printf("[3] [a,[]]\n");
     printf("[4] [[a,b],c]\n");
     printf("[5] [[a],C]\n");
+    printf("[6] [[c,b],a]\n");
+    printf("[7] [x,a,[c,d],[e,a,[f]],b]\n");
+
     printf("OPCAO: ");
 
     return getche();
@@ -21,6 +24,7 @@ char menu2()
 
 char menu()
 {
+    
     system("cls");
     printf("## MENU ##\n");
     printf("[1] Inserir Lista 1\n");
@@ -31,6 +35,7 @@ char menu()
     printf("[6] Compara Lista\n");
     printf("[7] Nivel da Lista\n");
     printf("[8] Concatenar Lista\n");
+    printf("[9] Ordenar Lista\n");
     printf("[ESC] SAIR\n");
     printf("OPCAO: ");
 
@@ -74,6 +79,12 @@ int main()
                 case '5':
                     L = Cons(Cons(CriaT("a"),NULL), Cons(CriaT("c"), NULL));
                     break;
+                case '6':
+                     L = Cons(Cons(CriaT("c"), Cons(CriaT("b"), NULL)), Cons(CriaT("a"), NULL));
+                    break;
+                 case '7':
+                     L = Cons(CriaT("x"),Cons(CriaT("a"),Cons(Cons(CriaT("c"),Cons(CriaT("d"),NULL)),Cons(Cons(CriaT("e"),Cons(CriaT("a"),Cons(Cons(CriaT("f"),NULL),NULL))),Cons(CriaT("b"),NULL)))));
+                    break;
                 }
             }
             else
@@ -104,7 +115,13 @@ int main()
                     L2 = Cons(Cons(CriaT("a"), Cons(CriaT("b"), NULL)), Cons(CriaT("c"), NULL));
                     break;
                 case '5':
-                    L = Cons(Cons(CriaT("a"),NULL), Cons(CriaT("c"), NULL));
+                    L2 = Cons(Cons(CriaT("a"),NULL), Cons(CriaT("c"), NULL));
+                    break;
+                case '6':
+                     L2 = Cons(Cons(CriaT("c"), Cons(CriaT("b"), NULL)), Cons(CriaT("a"), NULL));
+                    break;
+                case '7':
+                     L2 = Cons(CriaT("x"),Cons(CriaT("a"),Cons(Cons(CriaT("c"),Cons(CriaT("d"),NULL)),Cons(Cons(CriaT("e"),Cons(CriaT("a"),Cons(Cons(CriaT("f"),NULL),NULL))),Cons(CriaT("b"),NULL)))));
                     break;
                 }
             }
@@ -257,6 +274,17 @@ int main()
             }
             getchar();
             break;
+        case '9':
+            if(L != NULL)
+            {
+                L = localizaListas(L);
+                printf("Lista Ordenada\n");
+            }
+            else
+            {
+                 printf("Lista Vazia\n");
+            }
+            getchar();
         }
     } while (op != 27);
 

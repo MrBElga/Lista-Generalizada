@@ -1,8 +1,3 @@
-struct Fila{
-    int info;
-    struct Fila *prox;
-};
-typedef struct Fila fila;
 
 struct reg_lista
 {
@@ -20,6 +15,13 @@ struct listagen
     union info_lista no;
 };
 typedef struct listagen ListaGen;
+
+struct Fila{
+    ListaGen *info;
+    struct Fila *prox;
+};
+typedef struct Fila fila;
+
 
 ListaGen *CriaT(char info[])
 {
@@ -60,7 +62,7 @@ ListaGen *Head(ListaGen *L)
 {
     if (Nula(L) || Atomo(L))
     {
-        printf("Head: argumento deve ser lista não vazia!");
+        printf("Head: argumento deve ser lista nao vazia!\n");
         return NULL;
     }
     else
@@ -71,7 +73,7 @@ ListaGen *Tail(ListaGen *L)
 {
     if (Nula(L) || Atomo(L))
     {
-        printf("Tail: argumento deve ser lista não vazia!");
+        printf("Tail: argumento deve ser lista nao vazia!\n");
         return NULL;
     }
     else
@@ -174,39 +176,36 @@ char QisEmpety(fila *inicio){
 	return inicio == NULL;
 }
 
-void Enqueue(fila **inicio, int info){
-    fila *nova = (fila*) malloc(sizeof(fila)), *aux = *inicio;
+void Enqueue(fila **inicio, ListaGen *info) {
+    fila *nova = (fila *)malloc(sizeof(fila)), *aux = *inicio;
     nova->info = info;
     nova->prox = NULL;
-    if(!QisEmpety(*inicio)){
-       while(aux->prox !=NULL)
-        {
-            aux = aux -> prox;
+    if (!QisEmpety(*inicio)) {
+        while (aux->prox != NULL) {
+            aux = aux->prox;
         }
         aux->prox = nova;
-    }
-    else
-    {
-    	 *inicio = nova;
-        
+    } else {
+        *inicio = nova;
     }
 }
 
-void Dequeue(fila **inicio, int *info ){
+void Dequeue(fila **inicio, ListaGen **info) {
     fila *aux = *inicio;
-    if(!QisEmpety(*inicio)){      
-		*info = (*inicio)->info;
-		*inicio = (*inicio)->prox;
-		free(aux);	
-	}
-	else{
-		*info = -1;
-	}
+    if (!QisEmpety(*inicio)) {
+        *info = (*inicio)->info;
+        *inicio = (*inicio)->prox;
+        free(aux);
+    } else {
+        *info = NULL;
+    }
 }
+
  
-int top(fila *inicio){
-    return inicio->info;    
+ListaGen * top(fila *inicio){
+    return inicio->info;
 }
+
 
 void exibeF(fila *inicio){
     system("cls");
@@ -216,9 +215,85 @@ void exibeF(fila *inicio){
 	else{
 		printf("FILA: ");
 	    while(inicio != NULL){
-	        printf("%d ", inicio->info);
+	        printf("%p ", (void *)inicio->info);
 	        inicio=inicio->prox;
 	    }
 	}
 	printf("\n");
+}
+
+//FEITA COM BUBLESORT
+ListaGen * Ordena(ListaGen *L)
+{
+    char aux[8];
+    ListaGen *ant = NULL, *atual = L;
+    if(L!=NULL)
+    {
+   		if(Atomo(Head(atual)))
+	        ant = atual;
+	    atual = Tail(atual);
+    	while (!Nula(atual) && !Atomo(atual))
+    	{
+    	
+	    	if(((!Nula(atual)) && (!Nula(ant))) && Atomo(Head(atual)) && Atomo(Head(ant)))
+	    	{
+	    		if (strcmp(ant->no.info, atual->no.info) > 0 )
+		        {
+		            strcpy(aux, ant->no.info);
+		            strcpy(ant->no.info, atual->no.info);
+		            strcpy(atual->no.info, aux);
+		        }
+		       
+			}
+			if(Atomo(Head(atual)))
+	        		ant = atual;
+	        atual = Tail(atual);    	
+	    }
+	}
+      
+    return L;
+}
+
+
+ListaGen * localizaListas(ListaGen *Lista)
+{
+	int flag = 0;
+    fila *F1,*F2;
+    init(&F1);
+    init(&F2);
+    
+    ListaGen *temp, *L = Lista;
+    Enqueue(&F1,L);
+    Enqueue(&F2,L);
+    while(!QisEmpety(F1))
+    {
+        Dequeue(&F1,&L);
+        while (!Nula(L))
+        {
+            if(!Nula(Head(L)) && !(Atomo(Head(L))))
+            {
+                Enqueue(&F1,Head(L));
+                Enqueue(&F2,Head(L));
+            }
+            L=Tail(L);
+        }
+        
+	}
+
+   	while (!QisEmpety(F2))
+	{
+		Dequeue(&F2, &L);
+		if(flag==0)
+		{
+			Enqueue(&F1,L);
+			flag = 1;
+		}
+			
+    	
+    	temp = L; 
+    	L = Ordena(temp);
+	}
+	Dequeue(&F1,&L);
+	Lista = L;
+    return Lista;
 }
